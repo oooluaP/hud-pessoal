@@ -1,0 +1,12 @@
+# Arquivos com tokens e dados sensíveis
+config.js
+server.js
+
+# Extrato bancário e dados gerados
+extrato/saldo.json
+extrato/*.pdf
+
+# Sistema
+.DS_Store
+Thumbs.db
+node_modules/

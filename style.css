@@ -1,0 +1,351 @@
+/* ============================================
+   HUD PESSOAL — Estilos principais
+   Inspirado na HUD do GTA V
+   ============================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green:       #a8ff78;
+  --green-dim:   #4a7a4a;
+  --green-dark:  rgba(168,255,120,0.06);
+  --green-border: rgba(168,255,120,0.18);
+  --yellow:      #ffdd57;
+  --red:         #ff5f5f;
+  --bg:          #080d08;
+  --font-mono:   'Share Tech Mono', monospace;
+  --font-display:'Orbitron', sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--green);
+  font-family: var(--font-mono);
+  min-height: 100vh;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* efeito scanlines sutil */
+.scanlines {
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0,255,80,0.012) 3px,
+    rgba(0,255,80,0.012) 4px
+  );
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* ============ LAYOUT ============ */
+
+.hud-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 14px 18px;
+  gap: 12px;
+}
+
+/* HEADER */
+.hud-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--green-border);
+  padding-bottom: 10px;
+}
+
+.header-left, .header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 200px;
+}
+
+.header-right { justify-content: flex-end; }
+
+.clock {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: var(--green);
+}
+
+/* GRID */
+.hud-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+}
+
+/* FOOTER */
+.hud-footer {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--green-border);
+  padding-top: 10px;
+}
+
+/* ============ WIDGET BASE ============ */
+
+.widget {
+  background: var(--green-dark);
+  border: 1px solid var(--green-border);
+  border-radius: 4px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* canto decorativo estilo GTA */
+.widget::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 20px; height: 20px;
+  border-top: 2px solid var(--green);
+  border-left: 2px solid var(--green);
+}
+.widget::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 20px; height: 20px;
+  border-bottom: 2px solid var(--green);
+  border-right: 2px solid var(--green);
+}
+
+.widget-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--green-dim);
+  border-bottom: 1px solid var(--green-border);
+  padding-bottom: 8px;
+}
+
+.widget-footer {
+  margin-top: auto;
+}
+
+/* ============ SALDO ============ */
+
+.saldo-total {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #d4ffb0;
+}
+
+.saldo-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.saldo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.saldo-item-nome { color: var(--green-dim); }
+.saldo-item-valor { color: var(--green); }
+
+/* ============ MISSÕES ============ */
+
+.missoes-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  flex: 1;
+}
+
+.missao-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  padding: 5px 8px;
+  border-left: 2px solid var(--green-border);
+  transition: border-color 0.3s;
+}
+
+.missao-item.done {
+  color: var(--green-dim);
+  text-decoration: line-through;
+  border-left-color: var(--green-dim);
+}
+
+.missao-item.warn {
+  color: var(--yellow);
+  border-left-color: var(--yellow);
+}
+
+.missao-item .missao-autor {
+  font-size: 10px;
+  color: var(--green-dim);
+  margin-left: auto;
+}
+
+/* barra de progresso */
+.progress-label {
+  font-size: 11px;
+  color: var(--green-dim);
+  margin-bottom: 5px;
+}
+
+.progress-bar-bg {
+  height: 4px;
+  background: rgba(168,255,120,0.1);
+  border-radius: 2px;
+}
+
+.progress-bar-fill {
+  height: 4px;
+  background: var(--green);
+  border-radius: 2px;
+  transition: width 1s ease;
+}
+
+/* ============ AGENDA ============ */
+
+.agenda-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+}
+
+.agenda-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(168,255,120,0.07);
+}
+
+.agenda-item:last-child { border-bottom: none; }
+
+.agenda-nome { color: var(--green); }
+
+.agenda-data {
+  font-size: 11px;
+  color: var(--green-dim);
+  white-space: nowrap;
+  margin-left: 8px;
+}
+
+.agenda-data.hoje { color: var(--green); font-weight: bold; }
+.agenda-data.amanha { color: var(--yellow); }
+.agenda-data.urgente { color: var(--red); animation: blink 1s step-end infinite; }
+
+/* ============ ALERTAS ============ */
+
+.alertas-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.alerta-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 12px;
+  padding: 8px 10px;
+  border-radius: 3px;
+  border: 1px solid rgba(168,255,120,0.12);
+}
+
+.alerta-item.warn {
+  border-color: rgba(255,221,87,0.3);
+  background: rgba(255,221,87,0.05);
+  color: var(--yellow);
+}
+
+.alerta-item.danger {
+  border-color: rgba(255,95,95,0.3);
+  background: rgba(255,95,95,0.05);
+  color: var(--red);
+}
+
+.alerta-item.info {
+  border-color: var(--green-border);
+  color: var(--green-dim);
+}
+
+.alerta-icon { font-size: 14px; margin-top: 1px; }
+
+/* ============ ELEMENTOS GERAIS ============ */
+
+.label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--green-dim);
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  display: inline-block;
+}
+
+/* ============ ANIMAÇÕES ============ */
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 4px var(--green); }
+  50% { opacity: 0.4; box-shadow: none; }
+}
+
+@keyframes blink {
+  50% { opacity: 0.2; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.pulse { animation: pulse 2.5s ease-in-out infinite; }
+
+.widget { animation: fadeIn 0.4s ease both; }
+.widget:nth-child(1) { animation-delay: 0.05s; }
+.widget:nth-child(2) { animation-delay: 0.10s; }
+.widget:nth-child(3) { animation-delay: 0.15s; }
+.widget:nth-child(4) { animation-delay: 0.20s; }
+
+/* ============ RESPONSIVO (tablet) ============ */
+
+@media (max-width: 768px) {
+  .hud-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, auto);
+    overflow-y: auto;
+  }
+
+  .clock { font-size: 16px; letter-spacing: 2px; }
+  .saldo-total { font-size: 24px; }
+  body { overflow: auto; }
+}

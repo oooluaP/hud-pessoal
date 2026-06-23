@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HUD Pessoal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="scanlines"></div>
+
+  <div class="hud-container">
+
+    <!-- TOPO: status e relógio -->
+    <header class="hud-header">
+      <div class="header-left">
+        <span class="status-dot pulse"></span>
+        <span class="label">SISTEMA ONLINE</span>
+      </div>
+      <div class="header-center">
+        <span id="clock" class="clock">00:00:00</span>
+      </div>
+      <div class="header-right">
+        <span class="label" id="date-display">--/--/----</span>
+      </div>
+    </header>
+
+    <!-- GRID PRINCIPAL -->
+    <main class="hud-grid">
+
+      <!-- WIDGET: SALDO -->
+      <section class="widget widget-saldo">
+        <div class="widget-label">▸ SALDO TOTAL</div>
+        <div class="saldo-total" id="saldo-total">R$ ---.---,--</div>
+        <div class="saldo-bars" id="saldo-bars">
+          <!-- preenchido pelo JS -->
+        </div>
+        <div class="widget-footer">
+          <span id="meta-poupanca">carregando...</span>
+        </div>
+      </section>
+
+      <!-- WIDGET: MISSÕES DO DIA -->
+      <section class="widget widget-missoes">
+        <div class="widget-label">▸ MISSÕES DO DIA</div>
+        <ul class="missoes-list" id="missoes-list">
+          <!-- preenchido pelo JS -->
+        </ul>
+        <div class="widget-footer">
+          <div class="progress-label" id="missoes-progresso">0/0 concluídas</div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="missoes-bar"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- WIDGET: AGENDA -->
+      <section class="widget widget-agenda">
+        <div class="widget-label">▸ PRÓXIMOS EVENTOS</div>
+        <ul class="agenda-list" id="agenda-list">
+          <!-- preenchido pelo JS -->
+        </ul>
+      </section>
+
+      <!-- WIDGET: ALERTAS -->
+      <section class="widget widget-alertas">
+        <div class="widget-label">▸ ALERTAS</div>
+        <ul class="alertas-list" id="alertas-list">
+          <!-- preenchido pelo JS -->
+        </ul>
+      </section>
+
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="hud-footer">
+      <span class="label">HUD PESSOAL v1.0</span>
+      <span class="label" id="last-update">última atualização: --:--</span>
+      <span class="label">● <span id="footer-status">DADOS MOCKADOS</span></span>
+    </footer>
+
+  </div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
